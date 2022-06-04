@@ -84,7 +84,6 @@ const Post = ({ id, username, userImg, img, caption }: Props) => {
       ),
     [db, id]
   )
-  console.log(hasLiked)
 
   useEffect(
     () =>
