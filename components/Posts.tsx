@@ -18,12 +18,10 @@ const Posts = () => {
       ),
     [db]
   )
-  console.log(posts)
 
   return (
     <div>
       {posts.map((post: Post) => {
-        console.log(post.data())
         return (
           <Post
             key={post.id}

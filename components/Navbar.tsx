@@ -17,7 +17,6 @@ const Navbar = () => {
   const { data: session } = useSession()
   const router = useRouter()
   const [open, setOpen] = useRecoilState(modalState)
-  console.log(open)
 
   return (
     <nav className=" w-screen bg-white shadow-md px-5 h-[82px] z-50 sticky top-0 left-0 right-0">

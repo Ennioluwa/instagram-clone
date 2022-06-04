@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 const Stories = () => {
   const { data: session } = useSession()
-  const [suggestions, setSuggestions] = useState([])
+  const [suggestions, setSuggestions] = useState<any>([])
   useEffect(() => {
     const suggestions = [...Array(20)].map((_, i) => ({
       name: faker.name.findName(),
@@ -13,7 +13,6 @@ const Stories = () => {
       id: i,
     }))
     setSuggestions(suggestions)
-    console.log(suggestions)
   }, [])
 
   return (
@@ -36,26 +35,33 @@ const Stories = () => {
           </p>
         </div>
       )}
-      {suggestions.map((suggestion) => {
-        const { name, email, image, id } = suggestion
-        return (
-          <div
-            key={id}
-            className=" flex cursor-pointer flex-col gap-1 justify-center items-center bg-white"
-          >
-            <div className="relative h-14 w-14 rounded-full hover:scale-110 transition-transform duration-200 ease-out border-2 ring-2 border-white ring-red-500 overflow-clip">
-              <Image
-                src={image}
-                objectFit="contain"
-                layout="fill"
-                priority
-                className="p-[1.5px]"
-              />
+      {suggestions.map(
+        (suggestion: {
+          name: string
+          email: string
+          image: string
+          id: string
+        }) => {
+          const { name, email, image, id } = suggestion
+          return (
+            <div
+              key={id}
+              className=" flex cursor-pointer flex-col gap-1 justify-center items-center bg-white"
+            >
+              <div className="relative h-14 w-14 rounded-full hover:scale-110 transition-transform duration-200 ease-out border-2 ring-2 border-white ring-red-500 overflow-clip">
+                <Image
+                  src={image}
+                  objectFit="contain"
+                  layout="fill"
+                  priority
+                  className="p-[1.5px]"
+                />
+              </div>
+              <p className=" text-xs w-14 truncate text-center">{name}</p>
             </div>
-            <p className=" text-xs w-14 truncate text-center">{name}</p>
-          </div>
-        )
-      })}
+          )
+        }
+      )}
     </div>
   )
 }

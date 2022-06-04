@@ -49,19 +49,15 @@ const Modal = () => {
         createdAt: serverTimestamp(),
       })
         .then(async (data) => {
-          console.log(data)
           if (selectedFile) {
             const uploadTask = ref(storage, `posts/${data.id}/image`)
             await uploadString(uploadTask, selectedFile, 'data_url').then(
               async (result) => {
-                console.log(result)
-
                 removeImage()
                 setOpen(false)
                 setSelectedFile(null)
                 setLoading(false)
                 await getDownloadURL(result.ref).then(async (downloadURL) => {
-                  console.log('File available at', downloadURL)
                   const postRef = doc(db, 'posts', data.id)
                   await updateDoc(postRef, { image: downloadURL })
                 })

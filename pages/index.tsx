@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { Feed, Modal, Navbar } from '../components'
 
 const Home: NextPage = () => {
+  console.log(process.env.NAME)
+
   return (
     <div className=" bg-gray-100 overflow-hidden h-screen overflow-y-auto scrollbar-thumb-gray-200 scrollbar-track-gray-50 border-gray-200  scrollbar-thin ">
       <Head>
